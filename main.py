@@ -1,5 +1,5 @@
 import sys
-from ishare_ep import make_ep_token, create_spor_token, post_party_token
+from ishare_ep import make_ep_token, create_spor_token, post_ep_data
 from ishare_token import create_assertion
 import argparse
 from ishare_sat import satellite_auth, get_party
@@ -82,8 +82,7 @@ def main():
     entitled_party["registrar_id"] = serial_nr
 
     ep_token = make_ep_token(
-        client_id=args.client_id,
-        target_id=serial_nr,
+        satellite_eori=serial_nr,
         certs=certs,
         priv_key=priv_key,
         ep=entitled_party
@@ -91,9 +90,15 @@ def main():
 
     print(f"EP token: {ep_token}")
 
-    if not post_party_token(satellite_url=satellite_url,
-                            access_token=access_token,
-                            party_token=ep_token):
+    #if not post_party_token(satellite_url=satellite_url,
+    #                        access_token=access_token,
+    #                        party_token=ep_token):
+    #    print("Failed to create entitled party")
+    #    sys.exit(1)
+
+    if not post_ep_data(satellite_url=satellite_url,
+                        access_token=access_token,
+                        ep_data=entitled_party):
         print("Failed to create entitled party")
         sys.exit(1)
 

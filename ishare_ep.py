@@ -42,8 +42,7 @@ def create_spor_token(
 
 
 def make_ep_token(
-        client_id: str,
-        target_id: str,
+        satellite_eori: str,
         certs: list[str],
         priv_key: str,
         ep: object
@@ -58,9 +57,9 @@ def make_ep_token(
 
     now = datetime.now(timezone.utc).timestamp()
     # Create payload
-    iss = client_id
-    sub = client_id
-    aud = target_id
+    iss = satellite_eori
+    sub = satellite_eori
+    aud = satellite_eori
     jti = str(uuid.uuid1())
     iat = int(now)
     nbf = iat
@@ -95,12 +94,38 @@ def post_party_token(satellite_url: str,
         "ep_creation_token": party_token
     }
 
+    print(f"payload: {payload}")
+
     response = requests.post(urllib.parse.urljoin(satellite_url, f"/ep_creation"),
                              headers=headers,
                              json=payload)
     
     if response.status_code != 200:
         print(f"status_code: {response.status_code}, text: {response.text}")
+        return False
+    
+    return True
+
+
+def post_ep_data(satellite_url: str,
+                 access_token: str,
+                 ep_data: dict[str, Any]) -> bool:
+    headers = {
+        "Accept": "application/json",
+        "Authorization": f"Bearer {access_token}",
+    }
+   
+    payload = ep_data
+
+    print(f"payload: {payload}")
+
+    response = requests.post(urllib.parse.urljoin(satellite_url, f"/ep_creation"),
+                             headers=headers,
+                             json=payload)
+    
+    print(f"EP Creation response: status_code: {response.status_code}, text: {response.text}")
+
+    if response.status_code != 200:
         return False
     
     return True
