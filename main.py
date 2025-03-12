@@ -23,7 +23,6 @@ def main():
     parser.add_argument('--cert', required=True, help='Path to certificate file (.p12)')
     parser.add_argument('--password', required=True, help='Certificate password')
     parser.add_argument('--client-id', help='Optional client ID (defaults to certificate serial number)')
-    parser.add_argument('--satellite-eori', required=True, help='iSHARE satellite URL')
     parser.add_argument('--entitled-party-file', required=True, help='Path to entitled party file')
     parser.add_argument('--satellite-url', default='https://satellite-mw.dev.dexes.eu', help='iSHARE satellite URL')
     args = parser.parse_args()
@@ -37,7 +36,6 @@ def main():
     assertion, serial_nr, certs, priv_key = create_assertion(
         args.cert,
         args.password,
-        args.satellite_eori,
         args.client_id
     )
 
@@ -77,7 +75,6 @@ def main():
     )
 
     print(f"Spor token: {spor_token}")
-    sys.exit(1)
 
     entitled_party["spor"] = {
         "signed_request": spor_token,
@@ -86,7 +83,7 @@ def main():
 
     ep_token = make_ep_token(
         client_id=args.client_id,
-        target_id=args.satellite_eori,
+        target_id=serial_nr,
         certs=certs,
         priv_key=priv_key,
         ep=entitled_party

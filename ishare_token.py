@@ -125,7 +125,6 @@ def parse_cert(cert_file: str, password: str) -> Tuple[list[str], str, Optional[
 def create_assertion(
         cert_path: str,
         password: str,
-        target_id: str,
         client_id: str | None,
 ) -> Tuple[str, str]:
     certs, priv_key, serial_nr = parse_cert(cert_path, password)
@@ -134,7 +133,7 @@ def create_assertion(
 
     assertion = make_client_assertion(
         clientID=client_id if client_id else serial_nr,
-        targetID=target_id,
+        targetID=serial_nr,
         certs=certs,
         priv_key=priv_key,
     )
