@@ -123,9 +123,8 @@ def post_ep_data(satellite_url: str,
                              headers=headers,
                              json=payload)
     
-    print(f"EP Creation response: status_code: {response.status_code}, text: {response.text}")
-
+    print(f"EP Creation response: status_code: {response.status_code}")
     if response.status_code != 200:
+        print(f"EP Creation response: text: {response.text}")
         return False
-    
     return True
