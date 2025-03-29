@@ -24,7 +24,7 @@ def main():
     parser.add_argument('--password', required=True, help='Certificate password')
     parser.add_argument('--client-id', help='Optional client ID (defaults to certificate serial number)')
     parser.add_argument('--entitled-party-file', required=True, help='Path to entitled party file')
-    parser.add_argument('--satellite-url', default='https://satellite-mw.dev.dexes.eu', help='iSHARE satellite URL')
+    parser.add_argument('--satellite-url', required=True, help='iSHARE satellite URL')
     args = parser.parse_args()
 
     entitled_party = load_entitled_party_file(args.entitled_party_file)
