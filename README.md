@@ -170,7 +170,7 @@ You can generate multiple entitled party JSON files from a CSV file using the pr
 ### Input CSV Format
 
 The CSV file must contain the following **semicolon-separated** fields:
-party_id;party_name;start_date;end_date;description;logo;website;company_phone;company_email
+party_id;party_name;start_date;end_date;description;logo;website;company_phone;company_email;ToU_sign_date;ToU_expiry_date;ToU_agreement_file;AA_sign_date;AA_expiry_date;AA_agreement_file
 
 The fields party_id, party_name start_date and end_date are required. The rest of the fields will be defaulted to an empty string if they are left empty.
 
