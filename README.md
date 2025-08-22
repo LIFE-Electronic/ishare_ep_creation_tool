@@ -16,6 +16,7 @@ This tool facilitates the creation of Entitled Parties (EPs) within the iSHARE e
   - [Authentication Flow](#authentication-flow)
   - [Token Generation](#token-generation)
 - [Example JSON Format](#example-json-format)
+- [Generate Entitled Party JSON Files from CSV](#generate-entitled-party-json-files-from-csv)
 - [Troubleshooting](#troubleshooting)
 
 ## Overview
@@ -161,6 +162,36 @@ The entitled party JSON file must follow this structure:
     "authregistery": []
 }
 ```
+
+## Generate Entitled Party JSON Files from CSV
+
+You can generate multiple entitled party JSON files from a CSV file using the provided [transformation script](./transform_csv_to_json.py). This is useful when onboarding many parties at once.
+
+### Input CSV Format
+
+The CSV file must contain the following **semicolon-separated** fields:
+party_id;party_name;start_date;end_date;description;logo;website;company_phone;company_email;ToU_sign_date;ToU_expiry_date;ToU_agreement_file;AA_sign_date;AA_expiry_date;AA_agreement_file
+
+The fields party_id, party_name start_date and end_date are required. The rest of the fields will be defaulted to an empty string if they are left empty.
+
+### Template File
+
+The script requires a base JSON template that contains default values for fields not provided in the CSV. This template is merged with each CSV row to create a complete entitled party JSON document. A base template is provider in [template.json](./template.json).
+
+### Example usage
+
+```
+transform_csv_to_json.py \
+    --template-file template.json \
+    --ep-csv entitled_parties.csv \
+```
+
+This command will:
+	1.	Read entitled_parties.csv
+	2.	Merge each row with template.json
+	3.	Write one JSON file per party into the eps directory
+
+Each resulting file will be named like <row-index>_<party-id>.json.
 
 ## Troubleshooting
 

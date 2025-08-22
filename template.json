@@ -1,0 +1,53 @@
+{
+  "capability_url": "",
+  "registrar_id": null,
+  "additional_info": {
+    "description": "",
+    "logo": "",
+    "website": "",
+    "company_phone": "",
+    "company_email": "",
+    "publicly_publishable": "false",
+    "countriesOfOperation": [],
+    "sectorIndustry": [],
+    "tags": ""
+  },
+  "agreements": [
+    {
+      "type": "TermsOfUse",
+      "title": "ToU",
+      "status": "Accepted",
+      "sign_date": "",
+      "expiry_date": "",
+      "agreement_file": "",
+      "framework": "iSHARE",
+      "dataspace_id": "EU.NL.DMI-UAT",
+      "dataspace_title": "DMI Ecosysteem (UAT)",
+      "complaiancy_verified": "yes"
+    },
+    {
+      "type": "AccessionAgreement",
+      "title": "AA",
+      "status": "Accepted",
+      "sign_date": "",
+      "expiry_date": "",
+      "agreement_file": "",
+      "framework": "iSHARE",
+      "dataspace_id": "EU.NL.DMI-UAT",
+      "dataspace_title": "DMI Ecosysteem (UAT)",
+      "complaiancy_verified": "yes"
+    }
+  ],
+  "certificates": [],
+  "roles": [
+    {
+      "role": "EntitledParty",
+      "start_date": "",
+      "end_date": "",
+      "loa": "Low",
+      "complaiancy_verified": "yes",
+      "legal_adherence": "yes"
+    }
+  ],
+  "authregistery": []
+}
