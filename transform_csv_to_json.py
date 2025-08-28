@@ -78,7 +78,6 @@ def main():
                     row["AA_agreement_file"]
                 )
                 for x in template["agreements"]
-                if x["title"] == "ToU"
             ]
 
             output = {
